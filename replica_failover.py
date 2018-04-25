@@ -8,7 +8,7 @@ def write_test(isRetry):
     if isRetry:
         uri += "?retryWrites=true"
         print('Retryable writes enabled!')
-    client = MongoClient()
+    client = MongoClient(uri)
     db = client.get_database("failover")
     adminDB = client.get_database("admin")
     collection = db.get_collection("failover")
