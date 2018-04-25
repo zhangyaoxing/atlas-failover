@@ -15,7 +15,7 @@ def write_test():
             members = adminDB.command('replSetGetStatus')['members']
             for m in members:
                 if m['stateStr'] == 'PRIMARY':
-                    print('Current primary: ' + m.name)
+                    print('Current primary: ' + m['name'])
 
             # Insert fake document
             doc = {
