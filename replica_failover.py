@@ -3,12 +3,16 @@ from faker import Faker
 import time
 import sys
 
-def write_test():
-    fake = Faker()
-    client = MongoClient("mongodb+srv://atlas:testAtlas@cluster1-o0ium.mongodb.net/test")
+def write_test(isRetry):
+    uri = "mongodb+srv://atlas:testAtlas@cluster1-o0ium.mongodb.net/test"
+    if isRetry:
+        uri += "?retryWrites=true"
+        print('Retryable writes enabled!')
+    client = MongoClient()
     db = client.get_database("failover")
     adminDB = client.get_database("admin")
     collection = db.get_collection("failover")
+    fake = Faker()
     while True:
         try:
             # Get replica set status
